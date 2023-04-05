@@ -1,13 +1,13 @@
-# peak_mem_alloc
+# peakmem_alloc
 
 An instrumenting middleware for global allocators in Rust, useful to find the peak memory consumed by a function.
 
 ## Example
 
 ```rust
-extern crate peak_mem_alloc;
+extern crate peakmem_alloc;
 
-use peak_mem_alloc::{PeakAlloc, INSTRUMENTED_SYSTEM};
+use peakmem_alloc::{PeakAlloc, INSTRUMENTED_SYSTEM};
 use std::alloc::System;
 
 #[global_allocator]

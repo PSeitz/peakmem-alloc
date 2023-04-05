@@ -1,11 +1,11 @@
 [package]
-name = "peak_mem_alloc"
+name = "peakmem_alloc"
 version = "0.1.0"
 authors = ["Pascal Seitz <pascal.seitz@gmail.com>"]
 description = "An allocator wrapper that allows for scoped peak memory consumption"
-keywords = ["alloc", "instrument", "peak_mem", "peak"]
+keywords = ["alloc", "instrument", "peakmem", "peak"]
 license = "MIT"
-repository = "https://github.com/PSeitz/peak_mem_alloc"
+repository = "https://github.com/PSeitz/peakmem_alloc"
 readme = "README.md"
 exclude = [
     ".gitignore",
