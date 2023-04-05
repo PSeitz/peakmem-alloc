@@ -6,7 +6,7 @@
 //! ## Example
 //!
 //! ```
-//! extern crate peak_mem_alloc;
+//! extern crate peakmem_alloc;
 //!
 //! use peakmem_alloc::{PeakAlloc, INSTRUMENTED_SYSTEM};
 //! use std::alloc::System;

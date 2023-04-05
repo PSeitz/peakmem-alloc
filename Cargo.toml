@@ -1,5 +1,5 @@
 [package]
-name = "peakmem_alloc"
+name = "peakmem-alloc"
 version = "0.1.0"
 authors = ["Pascal Seitz <pascal.seitz@gmail.com>"]
 description = "An allocator wrapper that allows for scoped peak memory consumption"
