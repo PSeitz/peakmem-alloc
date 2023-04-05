@@ -1,0 +1,24 @@
+[package]
+name = "peak_mem_alloc"
+version = "0.1.0"
+authors = ["Pascal Seitz <pascal.seitz@gmail.com>"]
+description = "An allocator wrapper that allows for scoped peak memory consumption"
+keywords = ["alloc", "instrument", "peak_mem", "peak"]
+license = "MIT"
+repository = "https://github.com/PSeitz/peak_mem_alloc"
+readme = "README.md"
+exclude = [
+    ".gitignore",
+    ".editorconfig",
+    "release.toml",
+    "rustfmt.toml",
+    "tests/**/*",
+]
+
+[features]
+default = []
+nightly = []
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "doc_cfg"]
