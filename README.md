@@ -15,10 +15,10 @@ static GLOBAL: &PeakAlloc<System> = &INSTRUMENTED_SYSTEM;
 
 #[test]
 fn example_using_region() {
-    GLOBAL.reset_peak_memory();
+    GLOBAL.reset_peak_memory(); // Note that other threads may impact the peak memory computation.
     let _x: Vec<u8> = Vec::with_capacity(1_024);
     println!(
-        "Peak Memory used by function : {:#?}",
+        "Peak Memory used by function : {:#?}", 
         GLOBAL.get_peak_memory()
     );
 }

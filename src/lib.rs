@@ -1,7 +1,5 @@
 //!
-//! An instrumenting middleware for global allocators in Rust, useful in testing
-//! for validating assumptions regarding allocation patterns, and potentially in
-//! production loads to monitor for memory leaks.
+//! An instrumenting allocator wrapper to compute (scoped) peak memory consumption.
 //!
 //! ## Example
 //!
@@ -90,6 +88,7 @@ impl<T: GlobalAlloc> PeakAlloc<T> {
         self.peak_bytes_allocated.load(Ordering::SeqCst)
     }
 
+    #[inline]
     fn track_alloc(&self, bytes: usize) {
         let prev = self
             .peak_bytes_allocated_tracker
@@ -99,6 +98,7 @@ impl<T: GlobalAlloc> PeakAlloc<T> {
             .fetch_max(current_peak, Ordering::SeqCst);
     }
 
+    #[inline]
     fn track_dealloc(&self, bytes: usize) {
         self.peak_bytes_allocated_tracker
             .fetch_sub(bytes as isize, Ordering::SeqCst);
@@ -124,21 +124,25 @@ unsafe impl<'a, T: GlobalAlloc + 'a> GlobalAlloc for &'a PeakAlloc<T> {
 }
 
 unsafe impl<T: GlobalAlloc> GlobalAlloc for PeakAlloc<T> {
+    #[inline]
     unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
         self.track_alloc(layout.size());
         self.inner.alloc(layout)
     }
 
+    #[inline]
     unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
         self.track_dealloc(layout.size());
         self.inner.dealloc(ptr, layout)
     }
 
+    #[inline]
     unsafe fn alloc_zeroed(&self, layout: Layout) -> *mut u8 {
         self.track_alloc(layout.size());
         self.inner.alloc_zeroed(layout)
     }
 
+    #[inline]
     unsafe fn realloc(&self, ptr: *mut u8, layout: Layout, new_size: usize) -> *mut u8 {
         if new_size > layout.size() {
             let difference = new_size - layout.size();

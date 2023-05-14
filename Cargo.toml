@@ -10,7 +10,6 @@ readme = "README.md"
 exclude = [
     ".gitignore",
     ".editorconfig",
-    "release.toml",
     "rustfmt.toml",
     "tests/**/*",
 ]
